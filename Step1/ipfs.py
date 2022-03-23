@@ -64,7 +64,7 @@ def main():
     file_mimetype, _ = mimetypes.guess_type(path)
 
     metadata = {
-        'name': ASSET_NAME + "@arc3",
+        'name': ASSET_NAME,
         'description': ASSET_DESCRIPTION,
         'image': ipfs_image_address,
         'image_integrity': integrity,
