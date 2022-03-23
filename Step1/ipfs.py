@@ -51,6 +51,14 @@ def compute_integrity(ipfs_image_cid):
     integrity = "sha256-{}".format(integrity.decode('utf-8'))
     return integrity
 
+def compute_metadata_hash(metadata):
+    metadata_json_string = json.dumps(metadata)
+
+    hash = hashlib.sha256()
+    hash.update(metadata_json_string.encode("utf-8"))
+    ipfs_metadata_hash = hash.digest()
+    return ipfs_metadata_hash
+
 
 def main():
     path = os.path.dirname(os.path.realpath(__file__))
@@ -79,11 +87,7 @@ def main():
     ipfs_metadata_cid = pin_metadata_to_ipfs(metadata)
     ipfs_metadata_address = "ipfs://{}".format(ipfs_metadata_cid)
 
-    metadata_json_string = json.dumps(metadata)
-
-    hash = hashlib.sha256()
-    hash.update(metadata_json_string.encode("utf-8"))
-    ipfs_metadata_hash = hash.digest()
+    ipfs_metadata_hash = compute_metadata_hash(metadata) 
 
     print("IPFS metadata CID: {}".format(ipfs_metadata_cid))
     print("IPFS metadata address: {}".format(ipfs_metadata_address))
