@@ -32,8 +32,6 @@ def pin_image_to_ipfs(file_path):
     }
 
     response = requests.post(PINATA_IMAGE_URL, files=files, headers=PINATA_HEADERS)
-    print(response.status_code)
-
     if response.status_code == requests.codes.ok:
         return response.json()["IpfsHash"]
     else:
@@ -41,8 +39,6 @@ def pin_image_to_ipfs(file_path):
 
 def pin_metadata_to_ipfs(metadata):
     response = requests.post(PINATA_JSON_URL, json=metadata, headers=PINATA_HEADERS)
-
-    print(response.status_code)
 
     if response.status_code == requests.codes.ok:
         return response.json()["IpfsHash"]
@@ -81,7 +77,7 @@ def main():
 
     metadata_json_string = json.dumps(metadata)
 
-    hash = hashlib.new("sha512_256")
+    hash = hashlib.sha256()
     hash.update(metadata_json_string.encode("utf-8"))
     ipfs_metadata_hash = hash.digest()
 
