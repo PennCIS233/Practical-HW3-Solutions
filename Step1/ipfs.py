@@ -45,6 +45,12 @@ def pin_metadata_to_ipfs(metadata):
     else:
         return response.raise_for_status()
 
+def compute_integrity(ipfs_image_cid):
+    integrity = ipfscidv0_to_byte32(ipfs_image_cid)
+    integrity = base64.b64encode(bytes.fromhex(integrity))
+    integrity = "sha256-{}".format(integrity.decode('utf-8'))
+    return integrity
+
 
 def main():
     path = os.path.dirname(os.path.realpath(__file__))
@@ -53,9 +59,7 @@ def main():
     ipfs_image_cid = pin_image_to_ipfs(path)
     ipfs_image_address = "ipfs://{}".format(ipfs_image_cid)
 
-    integrity = ipfscidv0_to_byte32(ipfs_image_cid)
-    integrity = base64.b64encode(bytes.fromhex(integrity))
-    integrity = "sha256-{}".format(integrity.decode('utf-8'))
+    integrity = compute_integrity(ipfs_image_cid)
 
     file_mimetype, _ = mimetypes.guess_type(path)
 
