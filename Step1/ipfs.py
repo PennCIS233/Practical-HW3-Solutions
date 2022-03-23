@@ -37,6 +37,7 @@ def pin_image_to_ipfs(file_path):
     else:
         return response.raise_for_status()
 
+
 def pin_metadata_to_ipfs(metadata):
     response = requests.post(PINATA_JSON_URL, json=metadata, headers=PINATA_HEADERS)
 
@@ -45,11 +46,13 @@ def pin_metadata_to_ipfs(metadata):
     else:
         return response.raise_for_status()
 
+
 def compute_integrity(ipfs_image_cid):
     integrity = ipfscidv0_to_byte32(ipfs_image_cid)
     integrity = base64.b64encode(bytes.fromhex(integrity))
     integrity = "sha256-{}".format(integrity.decode('utf-8'))
     return integrity
+
 
 def compute_metadata_hash(metadata):
     metadata_json_string = json.dumps(metadata)
@@ -75,13 +78,8 @@ def main():
         'name': ASSET_NAME,
         'description': ASSET_DESCRIPTION,
         'image': ipfs_image_address,
-        'image_integrity': integrity,
+        'ipfs_integrity': integrity,
         'ipfs_mimetype': file_mimetype,
-        'properties': {
-            'file_url': FILE_NAME,
-            'file_url_integrity': integrity,
-            'file_url_mimetype': file_mimetype,
-        }
     }
 
     ipfs_metadata_cid = pin_metadata_to_ipfs(metadata)
