@@ -50,14 +50,6 @@ def create_nft(client, address, private_key, nft_info):
     print("Asset ID: {}".format(asset_id))
 
 
-def get_nft_info():
-    return {
-        'file-name': "lol.jpeg",
-        'unit-name': "LOL",
-        'asset-name': "lol 233",
-        'asset-description': "hmmmm",
-    }
-
 
 def main():
     algod_client = algod.AlgodClient(
