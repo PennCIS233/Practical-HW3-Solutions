@@ -11,7 +11,7 @@ from secrets import (
     PINATA_API_KEY, 
     PINATA_API_SECRET
 )
-from art.info import (
+from art.art_info import (
     FILE_NAME,
     ASSET_NAME,
     ASSET_DESCRIPTION
