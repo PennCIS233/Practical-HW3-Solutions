@@ -3,6 +3,11 @@ import requests
 
 from algosdk.v2client import algod
 
+from secrets import (
+    ALGOD_ADDRESS,
+    ALGOD_HEADERS
+)
+
 PINATA_GATEWAY = "https://gateway.pinata.cloud/ipfs/"
 
 # TODO fill me out
@@ -14,10 +19,11 @@ def serve_image(request):
 
     algod_client = algod.AlgodClient(
         algod_token="",
-        algod_address="https://testnet-algorand.api.purestake.io/ps2",
-        headers={"X-API-Key": "3oFTnjf15h9rHdK3QnCcO18tCSIyL1PIa4JvGCTU"}
+        algod_address=ALGOD_ADDRESS,
+        headers=ALGOD_HEADERS
     )
-    asset = algod_client.asset_info(asset_id)
+
+    asset = algod_client.asset_info(ASSET_ID)
     ipfs_metadata_address = asset['params']['url']
     ipfs_metadata_cid = ipfs_address_to_cid(ipfs_metadata_address)
     response = requests.get(PINATA_GATEWAY + ipfs_metadata_cid)

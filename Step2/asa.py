@@ -50,9 +50,7 @@ def main():
         algod_address=ALGOD_ADDRESS,
         headers=ALGOD_HEADERS,
     )
-    # create_ASA(algod_client, account_address, account_private_key)
-    asset = algod_client.asset_info(79849243)
-    print(asset)
+    create_ASA(algod_client, account_address, account_private_key)
 
 if __name__ == '__main__':
     main()
