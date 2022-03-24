@@ -30,7 +30,7 @@ def serve_image(request):
     if response.status_code != requests.codes.ok:
         return "Could not find IPFS metadata" 
 
-    content_type = response.json()["ipfs_mimetype"]
+    content_type = response.json()["image_mimetype"]
     ipfs_image_address = response.json()["image"]
     ipfs_image_cid = ipfs_address_to_cid(ipfs_image_address)
     img_response = requests.get(PINATA_GATEWAY + ipfs_image_cid)

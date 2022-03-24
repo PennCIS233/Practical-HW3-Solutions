@@ -78,8 +78,8 @@ def main():
         'name': ASSET_NAME,
         'description': ASSET_DESCRIPTION,
         'image': ipfs_image_address,
-        'ipfs_integrity': integrity,
-        'ipfs_mimetype': file_mimetype,
+        'image_integrity': integrity,
+        'image_mimetype': file_mimetype,
     }
 
     ipfs_metadata_cid = pin_metadata_to_ipfs(metadata)
