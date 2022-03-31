@@ -11,7 +11,7 @@ from secrets import (
 PINATA_GATEWAY = "https://gateway.pinata.cloud/ipfs/"
 
 # TODO fill me out
-ASSET_ID = 79849243
+ASSET_ID = 81357751
 
 def serve_image(request):
     def ipfs_address_to_cid(address):
@@ -30,7 +30,7 @@ def serve_image(request):
     if response.status_code != requests.codes.ok:
         return "Could not find IPFS metadata" 
 
-    content_type = response.json()["ipfs_mimetype"]
+    content_type = response.json()["image_mimetype"]
     ipfs_image_address = response.json()["image"]
     ipfs_image_cid = ipfs_address_to_cid(ipfs_image_address)
     img_response = requests.get(PINATA_GATEWAY + ipfs_image_cid)
